@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    color: #202124;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+    padding:0;
+    margin:0;
+}

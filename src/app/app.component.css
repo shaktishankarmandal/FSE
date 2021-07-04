@@ -1,0 +1,9 @@
+.landing-body{
+    position: relative;
+    background: url("../assets/Images/mediamodifier-I3HPUolh5hA-unsplash.jpg") no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+   
+}
