@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HeaderServiceComponent } from '../services/header.service.component';
 
 @Component({
@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private headerService: HeaderServiceComponent) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   OnSignIn(eventData: string){
