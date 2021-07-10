@@ -5,23 +5,42 @@
         </div>
         <div class="contentBox">
             <div class="fromBox">
-            <h2>Log  In</h2>
-            <form>
-                <div class="inputbox">
-                <span>Email</span>
-                <input type="email" name="">
-                </div>
-                <div class="inputbox">
-                <span>Password</span>
-                <input type="password" name="">
-                </div>
-                <div class="inputbox">
-                    <p>Forgot password ? <a routerLink ="/resetpassword">Reset Here</a></p>
-                </div>
-                <div class="inputbox">
-                <input type="submit" name="" value="Sign in">
-                </div>
-            </form>
+                <h2>Log  In</h2>
+                <form [formGroup]="signInForm" (ngSubmit)="OnFormSubmit()">
+                    <div class="inputbox">
+                        <span>Email</span>
+                        <input
+                        [ngClass] = "DisplayErrorClass('userEmail')"
+                        autocomplete="off"
+                        formControlName="userEmail"
+                        type="email" 
+                        name="userEmail" 
+                        id= "userEmail">
+                        <app-error-component-template 
+                        [displayError]= "IsAValidField('userEmail')"
+                        errorMessage="{{invalidEmail}}">
+                        </app-error-component-template>
+                    </div>
+                    <div class="inputbox">
+                        <span>Password</span>
+                        <input 
+                        [ngClass] = "DisplayErrorClass('userPassword')"
+                        formControlName="userPassword"
+                        type="password"
+                        name="userPassword" 
+                        id="userPassword">
+                        <app-error-component-template 
+                        [displayError]= "IsAValidField('userPassword')" 
+                        errorMessage="{{invalidPassword}}">
+                        </app-error-component-template>
+                    </div>
+                    <div class="inputbox">
+                        <p>Forgot password ? <a routerLink ="/resetpassword">Reset Here</a></p>
+                    </div>
+                    <div class="inputbox">
+                        <input type="submit" name="userSubmitBtn" id="userSubmitBtn" value="Sign in">
+                    </div>
+                </form>
             </div>
         </div>
     </section>

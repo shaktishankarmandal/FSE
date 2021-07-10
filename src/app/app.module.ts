@@ -11,6 +11,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { AppRoutingModule } from './app-routing-module';
 import { ResetpasswordComponent } from './body/resetpassword/resetpassword.component';
 import { HeaderServiceComponent } from './services/header.service.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorComponentTemplateComponent } from './errortemplate/error-component-template/error-component-template.component';
+import { FormGeneratorComponent } from './shared/form/form.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +24,15 @@ import { HeaderServiceComponent } from './services/header.service.component';
     SigninComponent,
     SignupComponent,
     NotfoundComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    ErrorComponentTemplateComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [HeaderServiceComponent],
+  providers: [HeaderServiceComponent, FormGeneratorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit{ 
