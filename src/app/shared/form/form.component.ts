@@ -18,7 +18,7 @@ export class FormGeneratorComponent
                     fieldsName.forEach(field =>{
 
                         var rules = validatorRuleBook.rules.get(field);                       
-                        formGroup.addControl(field, new FormControl(null, rules));
+                        formGroup.addControl(field, new FormControl(null, rules));                        
                     });
                 }
             }

@@ -13,14 +13,12 @@ export class SigninComponent implements OnInit {
   invalidEmail: string = "Please enter a valid email";
   invalidPassword: string = "Please enter valid password";
   isFormSubmitted: boolean = false;
+  
   signInForm: FormGroup = new FormGroup({});
 
   constructor(private formGroup: FormGeneratorComponent) { }
 
   ngOnInit(): void {
-  
-   // this.signInForm.addControl('userEmail', new FormControl( null, [Validators.required, Validators.email, Validators.minLength(10)]));
-    //this.signInForm.addControl('userPassword', new FormControl(null,  [Validators.required, Validators.email, Validators.minLength(10)]));
     this.signInForm = this.formGroup.CreateFormGroup({fieldsName: ['userEmail', 'userPassword']});
     this.isFormSubmitted = false;
   }
