@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
 
 @Component({
@@ -43,7 +43,12 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
 
     this.signUpFormGroup = this.formGroup.CreateFormGroup({fieldsName: this.fieldsName});
+    this.SetDovumentTypeValidator();
+    this.SetAccountTypeBasedOnAmount();
+    this.CreatePaginationForm();    
+  }
 
+  CreatePaginationForm() {
     var formContainerElement = document.getElementById("form-container-id"); 
     var firstNextElement = document.getElementById("firstNextElement");
     var secondNextElement = document.getElementById("secondNextElement");
@@ -83,13 +88,72 @@ export class SignupComponent implements OnInit {
       });
   }
 
+  SetDovumentTypeValidator() {
+    if(this.signUpFormGroup)
+    {
+      var documentTypeSelection = this.signUpFormGroup.get("userDocProof");
+      if(documentTypeSelection)
+      {
+        documentTypeSelection.valueChanges.subscribe( selectedDocType => this.OnValueChange(selectedDocType))
+      }
+    }
+  }
+
+  OnAmountValueChange = (depositAmount: string):void =>
+  {
+      if(depositAmount !== null)
+      {
+        var accountTypeControl = this.signUpFormGroup.get("userAccountType"); 
+        if(accountTypeControl !== null)
+        {
+          parseInt(depositAmount) === 5000 ? accountTypeControl.setValue("Saving") : accountTypeControl.setValue("Salary");
+          accountTypeControl.updateValueAndValidity();
+        }
+      }
+  }
+
+  SetAccountTypeBasedOnAmount()
+  {
+    if(this.signUpFormGroup)
+    {
+      var depositAmountControl = this.signUpFormGroup.get("userDepositAmount");
+      if(depositAmountControl)
+      {
+        depositAmountControl.valueChanges.subscribe( depositAmount => this.OnAmountValueChange(depositAmount))
+      }
+    }
+  }
+
+  OnValueChange = (selectedDocType: string): void =>{
+    if(selectedDocType)
+    {
+       var documentNoControl = this.signUpFormGroup.get("userDocNo");    
+       if(documentNoControl !== null)
+       {
+        selectedDocType === "PAN Card" ? 
+         documentNoControl.setValidators([Validators.required, Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]) :
+         documentNoControl.setValidators([Validators.required, Validators.pattern(/^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$/)]);
+         documentNoControl.updateValueAndValidity();
+       }
+    }
+  }
+
+  // OnAmountValueChange = (depositAmount: string):void =>
+  // {
+  //     if(depositAmount !== null)
+  //     {
+  //       var accountTypeControl = this.signUpFormGroup.get("userAccountType"); 
+  //       if(accountTypeControl !== null)
+  //       {
+  //         parseInt(depositAmount) === 5000 ? accountTypeControl.setValue("Saving") : accountTypeControl.setValue("Salary");
+  //         accountTypeControl.updateValueAndValidity();
+  //       }
+  //     }
+  // }
+
   OnRegister() : void {
     console.log("YOu have click on register");
     this.isFormSubmitted = true;
-  }
-
-  onChangeDocType(event: any){
-    console.log("printing event", event);
   }
 
   IsAValidField(fieldControlName: string)

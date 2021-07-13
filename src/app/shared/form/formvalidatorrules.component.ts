@@ -18,7 +18,7 @@ import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/
     userDocNoRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
     userAccountTypeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
     userBranchNamneRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
-    userDepositAmountRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
+    userDepositAmountRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
     userRegDateRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, this.ValidateRegDate.bind(this)]
     userAccHolderAccNo: ValidatorFn | ValidatorFn[] | null = [Validators.required]
     userRefAccHolderNameRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
@@ -66,6 +66,28 @@ import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/
         }
 
         return control.parent;
+    }
+
+    SetDepositAmountValidator(amountValidator: AbstractControl) : {[key: string]: boolean} | null
+    {
+        var parentControl = this.GetParentControl(amountValidator);
+        if(parentControl !== null)
+        {
+            var amountControl = parentControl.get("userDepositAmount");          
+            if(amountControl && amountControl.value )
+            {
+                var amount = parseFloat(amountControl.value);
+
+                if(amount <= 0)
+                {
+                    return {
+                        'isInvalidAmount' :  true                 
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     passwordMismatchValidator(confPasswordCrtl: AbstractControl) : {[key: string]: boolean} | null
@@ -140,10 +162,6 @@ import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/
 
         return null;
     }
-
-    // OnDocProofChange(control: AbstractControl):void{
-
-    // }
 
     updateCitizenshipStatusBasedOnDOB(parentControl: AbstractControl, calculatedAge: number): void {
         var citizenStatus = parentControl.get('userCitizenStatus'); 
