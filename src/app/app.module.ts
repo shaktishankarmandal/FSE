@@ -14,6 +14,10 @@ import { HeaderServiceComponent } from './services/header.service.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponentTemplateComponent } from './errortemplate/error-component-template/error-component-template.component';
 import { FormGeneratorComponent } from './shared/form/form.component';
+import { SideNavBarComponent } from './body/sidenavbar/sidenavbar.component';
+import { AccountsummaryComponent } from './body/accountsummary/accountsummary.component';
+import { ApplyloanComponent } from './body/applyloan/applyloan.component';
+import { UpdatecustomerComponent } from './body/updatecustomer/updatecustomer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { FormGeneratorComponent } from './shared/form/form.component';
     SignupComponent,
     NotfoundComponent,
     ResetpasswordComponent,
-    ErrorComponentTemplateComponent
+    ErrorComponentTemplateComponent,
+    AccountsummaryComponent,
+    ApplyloanComponent,
+    UpdatecustomerComponent    
   ],
   imports: [
     BrowserModule,

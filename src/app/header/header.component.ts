@@ -21,4 +21,16 @@ export class HeaderComponent implements OnInit {
     this.headerService.headerEventAction.next(eventData);
   }
 
+  OnApplyLoan(eventData: string){
+    this.headerService.headerEventAction.next(eventData);
+  }
+
+  OnUpdateCustomer(eventData: string){
+    this.headerService.headerEventAction.next(eventData);
+  }
+
+  OnLogOut(eventData: string){
+    this.headerService.headerEventAction.next(eventData);
+  }
+
 }

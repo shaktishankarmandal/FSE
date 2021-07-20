@@ -5,10 +5,19 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto custom-ul-style">         
+        <ul class="navbar-nav ms-auto custom-ul-style"> 
+          <li routerActiveLink="active" >
+            <a routerLink="/applyloan" (click)="OnApplyLoan('ApplyLoan')">Apply Loan</a>
+          </li>
+          <li routerActiveLink="active" >
+            <a routerLink="/updatecustomer" (click)="OnUpdateCustomer('UpdateCustomer')">Update Customer</a>
+          </li> 
+          <li routerActiveLink="active" >
+            <a routerLink="/logout" (click)="OnLogOut('LogOut')">Log Out</a>
+          </li>         
           <li routerActiveLink="active" >
             <a routerLink="/signup" (click)="OnSignUp('SignUp')">Create Account</a>
-          </li>               
+          </li> 
         </ul>
       </div>
     </div>

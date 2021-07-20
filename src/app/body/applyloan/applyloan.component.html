@@ -1,0 +1,291 @@
+<div class="signin-container container-fluid">
+    <section>
+        <div class="imgBox">
+            <img src="../../../assets/Images/morgan-housel-X_fbh4Utwk4-unsplash.jpg">
+        </div>
+        <div class="contentBox">
+            <div class="fromBox">
+                <h2>Apply Loan</h2>
+                <form [formGroup]="signInForm" (ngSubmit)="OnApplyLoan()">
+                    <div class="row">
+                        <div class="col-lg-6 p-1">
+                            <div class="inputbox">
+                                <span>Loan Type</span>
+                                <Select
+                                    class="dropDown" 
+                                    formControlName="loanType"
+                                    [ngClass] = "DisplayErrorClass('loanType')"
+                                    id="loanType"  
+                                    name="loanType">                                           
+                                        <option value="PersonLoan">Person/Home Loan</option>
+                                        <option value="EducationLoan">Education Loan</option> 
+                                </Select>
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('loanType')"
+                                errorMessage="{{invalidLoanType}}">
+                                </app-error-component-template>  
+                            </div>
+                            <div class="inputbox">
+                                <span>Loan Amount</span>
+                                <input 
+                                    type="text" 
+                                    formControlName="loanAmount"
+                                    [ngClass] = "DisplayErrorClass('loanAmount')"
+                                    id="loanAmount" 
+                                    name="loanAmount">
+                                    <app-error-component-template 
+                                    [displayError]= "IsAValidField('loanAmount')"
+                                    errorMessage="{{InvalidLoanAmount}}">
+                                    </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Loan Apply Date</span>
+                                <input 
+                                type="date" 
+                                formControlName="loanApplyDate"
+                                [ngClass] = "DisplayErrorClass('loanApplyDate')"
+                                id="loanApplyDate" 
+                                name="loanApplyDate">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('loanApplyDate')"
+                                errorMessage="{{invalidApplyDate}}">
+                                </app-error-component-template>
+                            </div>
+                        </div>                        
+                        <div class="col-lg-6 p-1">
+                            <div class="inputbox">
+                                <span>Loan Issue Date</span>
+                                <input 
+                                type="date" 
+                                formControlName="loanIssueDate"
+                                [ngClass] = "DisplayErrorClass('loanIssueDate')"
+                                id="loanIssueDate" 
+                                name="loanIssueDate">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('loanIssueDate')"
+                                errorMessage="{{invalidIssueDate}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <div class="inputbox">
+                                    <span>Rate Of Interest %</span>
+                                    <input 
+                                        type="text" 
+                                        formControlName="rateOfInterest"
+                                        [ngClass] = "DisplayErrorClass('rateOfInterest')"
+                                        id="rateOfInterest" 
+                                        name="rateOfInterest">
+                                        <app-error-component-template 
+                                        [displayError]= "IsAValidField('rateOfInterest')"
+                                        errorMessage="{{invalidInterestRate}}">
+                                        </app-error-component-template>
+                                </div>
+                            </div>
+                            <div class="inputbox">
+                                <span>Duration Of Loan</span>
+                                <input 
+                                [ngClass] = "DisplayErrorClass('loanDuration')"
+                                formControlName="loanDuration"
+                                type="number"
+                                name="loanDuration" 
+                                id="loanDuration">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('loanDuration')" 
+                                errorMessage="{{invalidLoanDuration}}">
+                                </app-error-component-template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-1">
+                            <div class="inputbox">
+                                <span>Course Fee</span>                               
+                                <input 
+                                type="text" 
+                                formControlName="courseFee"
+                                [ngClass] = "DisplayErrorClass('courseFee')"
+                                id="courseFee" 
+                                name="courseFee">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('courseFee')"
+                                errorMessage="{{InvalidcourseFee}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Course</span>
+                                <input 
+                                    type="text" 
+                                    formControlName="course"
+                                    [ngClass] = "DisplayErrorClass('course')"
+                                    id="course" 
+                                    name="course">
+                                    <app-error-component-template 
+                                    [displayError]= "IsAValidField('course')"
+                                    errorMessage="{{Invalidcourse}}">
+                                    </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Father name</span>
+                                <input 
+                                type="text" 
+                                formControlName="fatherName"
+                                [ngClass] = "DisplayErrorClass('fatherName')"
+                                id="fatherName" 
+                                name="fatherName">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('fatherName')"
+                                errorMessage="{{invalidFatherName}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Father Occupation</span>
+                                <input 
+                                type="text" 
+                                formControlName="fatherOccupation"
+                                [ngClass] = "DisplayErrorClass('fatherOccupation')"
+                                id="fatherOccupation" 
+                                name="fatherOccupation">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('fatherOccupation')"
+                                errorMessage="{{invalidOccupation}}">
+                                </app-error-component-template>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 p-1">
+                            <div class="inputbox">
+                                <span>Father's Total Exp</span>
+                                <input 
+                                type="number" 
+                                formControlName="fatherTotalExp"
+                                [ngClass] = "DisplayErrorClass('fatherTotalExp')"
+                                id="fatherTotalExp" 
+                                name="fatherTotalExp">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('fatherTotalExp')"
+                                errorMessage="{{invalidExp}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Father's Exp With Current Company</span>
+                                <input 
+                                type="number" 
+                                formControlName="fatherTotalCurrentExp"
+                                [ngClass] = "DisplayErrorClass('fatherTotalCurrentExp')"
+                                id="fatherTotalCurrentExp" 
+                                name="fatherTotalCurrentExp">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('fatherTotalCurrentExp')"
+                                errorMessage="{{invalidCurrentExp}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Ration Card No</span>
+                                <input 
+                                type="text" 
+                                formControlName="rationCardNo"
+                                [ngClass] = "DisplayErrorClass('rationCardNo')"
+                                id="rationCardNo" 
+                                name="rationCardNo">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('rationCardNo')"
+                                errorMessage="{{invalidRationCardNo}}">
+                                </app-error-component-template>
+                            </div>
+                            <div class="inputbox">
+                                <span>Annual Income</span>                               
+                                <input 
+                                type="text" 
+                                formControlName="annualIncome"
+                                [ngClass] = "DisplayErrorClass('annualIncome')"
+                                id="annualIncome" 
+                                name="annualIncome">
+                                <app-error-component-template 
+                                [displayError]= "IsAValidField('annualIncome')"
+                                errorMessage="{{InvalidAnnualIncome}}">
+                                </app-error-component-template>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-lg-6 p-1">
+                                <div class="inputbox">
+                                    <span>Annual Income</span>                               
+                                    <input 
+                                    type="text" 
+                                    formControlName="annualPersonalIncome"
+                                    [ngClass] = "DisplayErrorClass('annualPersonalIncome')"
+                                    id="annualPersonalIncome" 
+                                    name="annualPersonalIncome">
+                                    <app-error-component-template 
+                                    [displayError]= "IsAValidField('annualPersonalIncome')"
+                                    errorMessage="{{InvalidAnnualIncome}}">
+                                    </app-error-component-template>
+                                </div>
+                                <div class="inputbox">
+                                    <span>Company Name</span>
+                                    <input 
+                                        type="text" 
+                                        formControlName="companyName"
+                                        [ngClass] = "DisplayErrorClass('companyName')"
+                                        id="companyName" 
+                                        name="companyName">
+                                        <app-error-component-template 
+                                        [displayError]= "IsAValidField('companyName')"
+                                        errorMessage="{{InvalidCompanyName}}">
+                                        </app-error-component-template>
+                                </div>
+                                <div class="inputbox">
+                                    <span>Designation</span>
+                                    <input 
+                                    type="text" 
+                                    formControlName="designation"
+                                    [ngClass] = "DisplayErrorClass('designation')"
+                                    id="designation" 
+                                    name="designation">
+                                    <app-error-component-template 
+                                    [displayError]= "IsAValidField('designation')"
+                                    errorMessage="{{invalidDesignation}}">
+                                    </app-error-component-template>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 p-1">
+                                <div class="inputbox">
+                                    <span>Total Exp</span>
+                                    <input 
+                                    type="number" 
+                                    formControlName="employeeTotaleExp"
+                                    [ngClass] = "DisplayErrorClass('employeeTotaleExp')"
+                                    id="employeeTotaleExp" 
+                                    name="employeeTotaleExp">
+                                    <app-error-component-template 
+                                    [displayError]= "IsAValidField('employeeTotaleExp')"
+                                    errorMessage="{{invalidEmpExp}}">
+                                    </app-error-component-template> 
+                                </div>
+                                <div class="inputbox">
+                                    <span>Exp With Current Company</span>
+                                    <input 
+                                        type="number" 
+                                        formControlName="expCurrentCompany"
+                                        [ngClass] = "DisplayErrorClass('expCurrentCompany')"
+                                        id="expCurrentCompany" 
+                                        name="expCurrentCompany">
+                                        <app-error-component-template 
+                                        [displayError]= "IsAValidField('expCurrentCompany')"
+                                        errorMessage="{{InvalidEmpCurExp}}">
+                                        </app-error-component-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="inputbox">
+                            <input type="submit" name="userSubmitBtn" id="userSubmitBtn" value="Apply Loan">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

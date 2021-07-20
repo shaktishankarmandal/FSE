@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import 'src/app/shared/form/FormExtension.component';
 import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
+import { fromEvent, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -9,21 +10,21 @@ import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-
+  
   invalidEmail: string = "Please enter a valid email";
   invalidPassword: string = "Please enter valid password";
   isFormSubmitted: boolean = false;
-  
+  signInEvent : Observable<Event> = new Observable
   signInForm: FormGroup = new FormGroup({});
 
   constructor(private formGroup: FormGeneratorComponent) { }
 
   ngOnInit(): void {
-    this.signInForm = this.formGroup.CreateFormGroup({fieldsName: ['userEmail', 'userPassword']});
+    this.signInForm = this.formGroup.CreateFormGroup({fieldsName: ['userEmail', 'userPassword']});   
     this.isFormSubmitted = false;
   }
 
-  OnFormSubmit = ():void =>{
+  OnSignIn = ():void =>{
     this.isFormSubmitted = true;
     if(this.signInForm.valid)
     {     

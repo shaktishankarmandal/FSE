@@ -11,9 +11,8 @@ export class BodyComponent implements OnInit {
   constructor(private headerService: HeaderServiceComponent) { }
 
   ngOnInit(): void {
-    this.headerService.headerEventAction.subscribe(headerAction => {
-      this.selectionType = headerAction;
-  });   
+      this.headerService.headerEventAction.subscribe(headerAction => {
+        this.selectionType = headerAction;
+    });   
   }
-
 }
