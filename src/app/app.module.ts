@@ -1,5 +1,6 @@
 import { NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,6 +19,12 @@ import { SideNavBarComponent } from './body/sidenavbar/sidenavbar.component';
 import { AccountsummaryComponent } from './body/accountsummary/accountsummary.component';
 import { ApplyloanComponent } from './body/applyloan/applyloan.component';
 import { UpdatecustomerComponent } from './body/updatecustomer/updatecustomer.component';
+import { LogInServiceComponent } from './services/logIn.service.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { SignInEffects } from './store/effects/sign-in-effects';
+import { SignInReducer } from './store/reducer/sign-in-reducer';
+import { AppReducer } from './store/app-reducer';
 
 @NgModule({
   declarations: [
@@ -36,10 +43,13 @@ import { UpdatecustomerComponent } from './body/updatecustomer/updatecustomer.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(AppReducer),
+    EffectsModule.forRoot([SignInEffects])
   ],
-  providers: [HeaderServiceComponent, FormGeneratorComponent],
+  providers: [HeaderServiceComponent, LogInServiceComponent, FormGeneratorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit{ 

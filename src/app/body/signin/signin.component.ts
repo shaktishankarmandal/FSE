@@ -3,6 +3,11 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import 'src/app/shared/form/FormExtension.component';
 import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
 import { fromEvent, Observable } from 'rxjs';
+import { LogInServiceComponent } from 'src/app/services/logIn.service.component';
+import {Router} from '@angular/router';
+import SignInModel from 'src/app/model/sign-in-model';
+import { Store } from '@ngrx/store';
+import { GetSignInAction } from 'src/app/store/action/sign-in-action';
 
 @Component({
   selector: 'app-signin',
@@ -16,19 +21,42 @@ export class SigninComponent implements OnInit {
   isFormSubmitted: boolean = false;
   signInEvent : Observable<Event> = new Observable
   signInForm: FormGroup = new FormGroup({});
+  signInData: SignInModel = {
+    id: "", 
+    userEmail: 
+    "", passWord:"", 
+    isUserLoggedIn: false, 
+    signInError: ""};
 
-  constructor(private formGroup: FormGeneratorComponent) { }
+  constructor(private formGroup: FormGeneratorComponent, 
+    private logInService: LogInServiceComponent,
+    private store : Store<SignInModel>,
+    private _router: Router) { }
 
   ngOnInit(): void {
-    this.signInForm = this.formGroup.CreateFormGroup({fieldsName: ['userEmail', 'userPassword']});   
+    this.signInForm = this.formGroup.CreateFormGroup({fieldsName: ['userEmail', 'userPassword']}); 
+    this.store.select(item => item).subscribe(responseData => this.OnUserLoggedIn);
     this.isFormSubmitted = false;
+  }
+
+  OnUserLoggedIn(userData: SignInModel)
+  {
+      if(userData !== null)
+      {
+        this.isFormSubmitted = userData.isUserLoggedIn;
+
+      }
   }
 
   OnSignIn = ():void =>{
     this.isFormSubmitted = true;
     if(this.signInForm.valid)
-    {     
-      this.signInForm.resetFields(['userPassword']);
+    {   
+      this.signInData =  this.GetSignInData();
+      this.signInForm.resetFields(['userEmail','userPassword']);  
+      this.store.dispatch(new GetSignInAction(this.signInData));
+      this.logInService.logInEventAction.next(this.isFormSubmitted);
+      this._router.navigateByUrl('/accountsummary');
       this.isFormSubmitted = false;
     } 
   }
@@ -73,4 +101,9 @@ export class SigninComponent implements OnInit {
           }
       });
   }
+
+  GetSignInData(): SignInModel {
+    return this.signInData;
+ } 
 }
+

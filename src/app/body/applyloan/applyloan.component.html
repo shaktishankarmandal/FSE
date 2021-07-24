@@ -6,19 +6,21 @@
         <div class="contentBox">
             <div class="fromBox">
                 <h2>Apply Loan</h2>
-                <form [formGroup]="signInForm" (ngSubmit)="OnApplyLoan()">
+                <form [formGroup]="applyLoanForm" (ngSubmit)="OnApplyLoan()">
                     <div class="row">
                         <div class="col-lg-6 p-1">
                             <div class="inputbox">
                                 <span>Loan Type</span>
                                 <Select
+                                 
                                     class="dropDown" 
                                     formControlName="loanType"
                                     [ngClass] = "DisplayErrorClass('loanType')"
                                     id="loanType"  
                                     name="loanType">                                           
-                                        <option value="PersonLoan">Person/Home Loan</option>
-                                        <option value="EducationLoan">Education Loan</option> 
+                                        <option value="Person Loan">Person Loan</option>
+                                        <option value="Home Loan">Home Loan</option>
+                                        <option value="Education Loan">Education Loan</option> 
                                 </Select>
                                 <app-error-component-template 
                                 [displayError]= "IsAValidField('loanType')"
@@ -206,7 +208,7 @@
                             </div>                           
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row personal-loan"  *ngIf="isPersonalLoan">
                         <div class="row">
                             <div class="col-lg-6 p-1">
                                 <div class="inputbox">

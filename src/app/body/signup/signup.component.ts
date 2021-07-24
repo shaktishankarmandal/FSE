@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import SignUpModel from 'src/app/model/sign-up-model';
 import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
+import { SignUpStartAction } from 'src/app/store/action/sign-up-action';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +41,7 @@ export class SignupComponent implements OnInit {
   invalidName:string = "Please enter a valid name";
   signUpFormGroup: FormGroup  = new FormGroup({});
   isFormSubmitted: boolean = false;
-  constructor(private formGroup: FormGeneratorComponent) { }
+  constructor(private formGroup: FormGeneratorComponent, private store: Store<SignUpModel>) { }
 
   ngOnInit(): void {
 
@@ -138,21 +141,9 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  // OnAmountValueChange = (depositAmount: string):void =>
-  // {
-  //     if(depositAmount !== null)
-  //     {
-  //       var accountTypeControl = this.signUpFormGroup.get("userAccountType"); 
-  //       if(accountTypeControl !== null)
-  //       {
-  //         parseInt(depositAmount) === 5000 ? accountTypeControl.setValue("Saving") : accountTypeControl.setValue("Salary");
-  //         accountTypeControl.updateValueAndValidity();
-  //       }
-  //     }
-  // }
-
   OnRegister() : void {
-    console.log("YOu have click on register");
+    var userData: SignUpModel = this.GetRegisterDetails()
+    this.store.dispatch(new SignUpStartAction(userData))
     this.isFormSubmitted = true;
   }
 
@@ -182,4 +173,34 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  GetRegisterDetails(): SignUpModel {
+    return {
+      id: "ssadasdasda",
+    name: "ssadasdasda",
+    userName: "ssadasdasda",
+    userMobile: 7484875745,
+    userDOB: new Date(),
+    userAddress: "ssadasdasda",
+    userState: "ssadasdasda",
+    userCountry: "ssadasdasda",
+    userCitizenship: "ssadasdasda",
+    userCitizenStatus: "ssadasdasda",
+    userGender: "ssadasdasda",
+    userDocProof: "ssadasdasda",
+    userDocNo: "ssadasdasda",
+    userAccountType: "ssadasdasda",
+    userBranchNamne: "ssadasdasda",
+    userDepositAmount: "ssadasdasda",
+    userRegDate: new Date(),
+    userRefAccHolderName: "ssadasdasda",
+    userAccHolderAddress: "ssadasdasda",
+    userGuardianType: "ssadasdasda",
+    userGuardianName: "ssadasdasda",
+    userMaritalStatus: "ssadasdasda"
+
+    }
+  }
+
 }
+
+

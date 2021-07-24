@@ -26,6 +26,25 @@ import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/
     userGuardianTypeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
     userGuardianNameRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
     userMaritalStatusRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
+    userloanTypeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
+    userloanAmountRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userloanApplyDateRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
+    userloanIssueDateRule: ValidatorFn | ValidatorFn[] | null = [Validators.required]
+    userrateOfInterestRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userloanDurationRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    usercourseFeeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    usercourseRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z\s]+)/)]
+    userfatherNameRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z\s]+)/)]
+    userfatherOccupationRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z\s]+)/)]
+    userfatherTotalExpRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userfatherTotalCurrentExpRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userrationCardNoRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z0-9]){8,12}\s*$/)]
+    userannualIncomeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userannualPersonalIncomeRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    usercompanyNameRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z\s]+)/)]
+    userdesignationRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/^([a-zA-Z\s]+)/)]
+    useremployeeTotaleExpRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
+    userexpCurrentCompanyRule: ValidatorFn | ValidatorFn[] | null = [Validators.required, Validators.pattern(/(?<=^| )\d+(\.\d+)?(?=$| )|(?<=^| )\.\d+(?=$|)/), this.SetDepositAmountValidator.bind(this)]
   
     rules = new Map<string, ValidatorFn | ValidatorFn[] | null>();    
     
@@ -56,6 +75,25 @@ import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/
         this.rules.set("userGuardianType", this.userGuardianTypeRule);
         this.rules.set("userGuardianName", this.userGuardianNameRule);
         this.rules.set("userMaritalStatus", this.userMaritalStatusRule);
+        this.rules.set("loanType", this.userloanTypeRule);
+        this.rules.set("loanAmount", this.userloanAmountRule);
+        this.rules.set("loanApplyDate", this.userloanApplyDateRule);
+        this.rules.set("loanIssueDate", this.userloanIssueDateRule);
+        this.rules.set("rateOfInterest", this.userrateOfInterestRule);
+        this.rules.set("loanDuration", this.userloanIssueDateRule);
+        this.rules.set("courseFee", this.usercourseFeeRule);
+        this.rules.set("course", this.usercourseRule);
+        this.rules.set("fatherName", this.userfatherNameRule);
+        this.rules.set("fatherOccupation", this.userfatherOccupationRule);
+        this.rules.set("fatherTotalExp", this.userfatherTotalExpRule);
+        this.rules.set("fatherTotalCurrentExp", this.userfatherTotalCurrentExpRule);
+        this.rules.set("rationCardNo", this.userrationCardNoRule);
+        this.rules.set("annualIncome", this.userannualIncomeRule);
+        this.rules.set("annualPersonalIncome", this.userannualPersonalIncomeRule);
+        this.rules.set("companyName", this.usercompanyNameRule);
+        this.rules.set("designation", this.userdesignationRule);
+        this.rules.set("employeeTotaleExp", this.useremployeeTotaleExpRule);
+        this.rules.set("expCurrentCompany", this.userexpCurrentCompanyRule);
     }
 
     GetParentControl(control: AbstractControl): AbstractControl | null{

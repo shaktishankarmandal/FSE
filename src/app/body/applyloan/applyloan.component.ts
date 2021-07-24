@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { FormGeneratorComponent } from 'src/app/shared/form/form.component';
 // import 'src/app/shared/form/FormExtension.component';
 
 @Component({
@@ -12,38 +13,85 @@ export class ApplyloanComponent implements OnInit {
 
   invalidEmail: string = "Please enter a valid email";
   invalidPassword: string = "Please enter valid password";
-  invalidLoanType: string = "";
-  InvalidLoanAmount: string = "";
-  invalidApplyDate: string = "";
-  invalidIssueDate: string = "";
-  invalidInterestRate: string = "";
-  invalidLoanDuration: string = "";
-  InvalidcourseFee: string = "";
-  Invalidcourse: string = "";
-  invalidFatherName: string = "";
-  invalidOccupation: string = "";
-  invalidExp: string = "";
-  invalidCurrentExp: string = "";
-  invalidRationCardNo: string = ""; 
-  InvalidAnnualIncome: string = "";
-  InvalidCompanyName: string = "";
-  invalidDesignation: string = "";
-  invalidEmpExp: string = "";
-  InvalidEmpCurExp: string = "";
+  invalidLoanType: string = "Please enter valid loan type";
+  InvalidLoanAmount: string = "Please enter valid loan amount";
+  invalidApplyDate: string = "Please enter valid apply date";
+  invalidIssueDate: string = "Please enter valid issue date";
+  invalidInterestRate: string = "Please enter valid interest rate";
+  invalidLoanDuration: string = "Please enter valid duration";
+  InvalidcourseFee: string = "Please enter valid course fee";
+  Invalidcourse: string = "Please enter valid course";
+  invalidFatherName: string = "Please enter valid father name";
+  invalidOccupation: string = "Please enter valid occupation";
+  invalidExp: string = "Please enter valid Experience";
+  invalidCurrentExp: string = "Please enter valid current experience";
+  invalidRationCardNo: string = "Please enter valid card no"; 
+  InvalidAnnualIncome: string = "Please enter valid Income";
+  InvalidCompanyName: string = "Please enter valid company";
+  invalidDesignation: string = "Please enter valid designation";
+  invalidEmpExp: string = "Please enter total experience";
+  InvalidEmpCurExp: string = "Please enter current experience";
 
   isFormSubmitted: boolean = false;
-  signInEvent : Observable<Event> = new Observable
-  signInForm: FormGroup = new FormGroup({});
+  isPersonalLoan: boolean = false;
+  applyLoanEvent : Observable<Event> = new Observable
+  applyLoanForm: FormGroup = new FormGroup({});
+
+  readonly fieldsName = [
+    "loanType",
+    "loanAmount",
+    "loanApplyDate",
+    "loanIssueDate",
+    "rateOfInterest",
+    "loanDuration",
+    "courseFee",
+    "course",
+    "fatherName",
+    "fatherOccupation",
+    "fatherTotalExp",
+    "fatherTotalCurrentExp",
+    "rationCardNo",
+    "annualIncome",
+    "annualPersonalIncome",
+    "companyName",
+    "designation",
+    "employeeTotaleExp",
+    "expCurrentCompany"];
   
-  constructor() { }
+  constructor(private formGroup: FormGeneratorComponent) { }
 
   ngOnInit(): void {
+
+    this.applyLoanForm = this.formGroup.CreateFormGroup({fieldsName: this.fieldsName});
+    this.SetFiledsBasedOnLoanType();
+  }
+
+  SetFiledsBasedOnLoanType()
+  {
+    if(this.applyLoanForm)
+    {
+      // var loanType = this.applyLoanForm.get("loanType");
+      // if(loanType)
+      // {
+      //   loanType.valueChanges.subscribe( selectetypedDocType => this.OnLoanTypeValueChange(selectetypedDocType))
+      // }
+    }
+  }
+  OnLoanTypeValueChange(selectedDocType: any): void {
+         
+    if(selectedDocType !== null && selectedDocType !== undefined)
+    {
+     selectedDocType === "Personal Loan" ? this.isPersonalLoan = true : this.isPersonalLoan = false;
+    }
+  }
+
+  OnValueChange(selectedDocType: any): void {
   }
 
 
   IsAValidField(fieldControlName: string)
   {    
-    var control = this.signInForm.get(fieldControlName);
+    var control = this.applyLoanForm.get(fieldControlName);
     if(control !== undefined && control !== null)
     {
       if(control.touched === false && this.isFormSubmitted === true)

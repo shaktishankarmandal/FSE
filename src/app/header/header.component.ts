@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HeaderServiceComponent } from '../services/header.service.component';
+import { LogInServiceComponent } from '../services/logIn.service.component';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,15 @@ import { HeaderServiceComponent } from '../services/header.service.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private headerService: HeaderServiceComponent) { }
+  isUserLoggedIn: boolean = false;
+  constructor(private headerService: HeaderServiceComponent, private logInService: LogInServiceComponent) { 
+    this.logInService.logInEventAction.subscribe(value => {
+      if(value !== undefined)
+      {
+        this.isUserLoggedIn = true;
+      }
+    });
+  }
 
   ngOnInit(): void {    
   }
@@ -30,6 +39,7 @@ export class HeaderComponent implements OnInit {
   }
 
   OnLogOut(eventData: string){
+    this.isUserLoggedIn = false;
     this.headerService.headerEventAction.next(eventData);
   }
 
