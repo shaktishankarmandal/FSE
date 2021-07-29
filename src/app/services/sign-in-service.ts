@@ -10,6 +10,12 @@ export class SignInService {
 
     constructor(private httpClient: HttpClient){}
     signIn(userData: SignInModel) {
-        return this.httpClient.get<SignInModel>('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        return this.httpClient.post<SignInModel>('https://localhost:5001/Authenticate/signin',userData, {
+            headers: {
+                'Accept': 'Application/json, text/plain',   
+                'content-type': 'application/json'
+            },
+            withCredentials: false
+        });
     }
 }

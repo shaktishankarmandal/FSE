@@ -33,6 +33,7 @@ export function SignInReducer(state: SignUpModel = initialState, action: Action)
     {
         case SignUpActionTypes.SIGN_UP:
             {
+                console.log("I am in the action");
                 return {
                     ...state,                   
                 };
@@ -42,7 +43,7 @@ export function SignInReducer(state: SignUpModel = initialState, action: Action)
                 return{
                     ...state,  
                     id: signUpAction.payLoad.id,                                 
-                    isUserLoggedIn: signUpAction.payLoad.isUserLoggedIn,
+                   // isUserLoggedIn: signUpAction.payLoad.isUserLoggedIn,
                     passWord: ""
                 }
             }
@@ -50,7 +51,7 @@ export function SignInReducer(state: SignUpModel = initialState, action: Action)
             {
                 return{
                     ...state,                   
-                    isUserLoggedIn: signUpAction.payLoad.isUserLoggedIn
+                  //  isUserLoggedIn: signUpAction.payLoad.isUserLoggedIn
                 }
             }
         default:

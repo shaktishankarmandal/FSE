@@ -10,6 +10,13 @@ export class SignUpService {
 
     constructor(private httpClient: HttpClient){}
     createAccount(userData: SignUpModel) {
-        return this.httpClient.get<SignUpModel>('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        console.log("I am in the service", userData);
+        return this.httpClient.post<SignUpModel>('https://localhost:5001/Authenticate/CreateAccount',userData, {
+            headers: {
+                'Accept': 'Application/json, text/plain',
+                'content-type': 'application/json'
+            },
+            withCredentials: false
+        });
     }
 }

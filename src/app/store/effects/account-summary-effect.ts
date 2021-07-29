@@ -11,7 +11,7 @@ export class AccountSummaryEffect {
 
     constructor(private actions: Actions, private service: AccountSummaryService){}
 
-    fetchAccountSummary = createEffect(() => {
+    fetchAccountSummary$ = createEffect(() => {
         return this.actions.pipe(
             ofType<FetchAccountSummaryActionStart>(AccountSummaryActionTypes.ACCCOUNT_SUMMARY_START),
             switchMap((action: AccountSummaryAction) =>{

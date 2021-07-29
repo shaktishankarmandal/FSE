@@ -14,11 +14,13 @@ import { SignUpService } from "src/app/services/sign-up-service";
 @Injectable()
 export class SignUpEffects {
 
-    getSignIn$: Observable<Action> = createEffect((): any => this.action$.pipe
+    getSignUp$: Observable<Action> = createEffect((): any => this.action$.pipe
         (
+           
             ofType<SignUpStartAction>(SignUpActionTypes.SIGN_UP),
             switchMap( (signUpAction: SignUpStartAction) => 
                 {
+                    console.log("I am in the effect", signUpAction.payLoad);
                     return this.sigUpService.createAccount(signUpAction.payLoad)
                     .pipe(
                         mergeMap( response =>

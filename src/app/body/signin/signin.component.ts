@@ -22,9 +22,8 @@ export class SigninComponent implements OnInit {
   signInEvent : Observable<Event> = new Observable
   signInForm: FormGroup = new FormGroup({});
   signInData: SignInModel = {
-    id: "", 
-    userEmail: 
-    "", passWord:"", 
+    userEmail:"", 
+    passWord:"", 
     isUserLoggedIn: false, 
     signInError: ""};
 
@@ -56,7 +55,7 @@ export class SigninComponent implements OnInit {
       this.signInForm.resetFields(['userEmail','userPassword']);  
       this.store.dispatch(new GetSignInAction(this.signInData));
       this.logInService.logInEventAction.next(this.isFormSubmitted);
-      this._router.navigateByUrl('/accountsummary');
+      //this._router.navigateByUrl('/accountsummary');
       this.isFormSubmitted = false;
     } 
   }
@@ -103,6 +102,13 @@ export class SigninComponent implements OnInit {
   }
 
   GetSignInData(): SignInModel {
+    this.signInData = {userEmail: "", passWord: "", isUserLoggedIn: false, signInError: ""};
+    if(this.signInForm.value)
+    {
+      this.signInData.passWord = this.signInForm.value.userPassword;
+      this.signInData.userEmail = this.signInForm.value.userEmail
+    }
+
     return this.signInData;
  } 
 }

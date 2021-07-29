@@ -5,7 +5,9 @@ import { SignUpActionTypes } from "./sign-up-action-type";
 
 export class SignUpStartAction implements Action {
     readonly type = SignUpActionTypes.SIGN_UP;
-    constructor(public payLoad: SignUpModel){}
+    constructor(public payLoad: SignUpModel){
+        console.log("I am in the start action");
+    }
 }
 
 export class SignUpSuccessAction implements Action {
